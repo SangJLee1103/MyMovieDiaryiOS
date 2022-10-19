@@ -1,0 +1,14 @@
+//
+//  Debug.xcconfig
+//  MyMovieDiaryiOS
+//
+//  Created by 이상준 on 2022/10/19.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+KOBIS_API_KEY = 2dd98975470a9fd3b9aded45b2717bef
+NAVER_CLIENT_ID = pQrcK9fOoSR9WT6Pgrk0
+NAVER_CLIENT_SECRET = tchXT5lFbO
