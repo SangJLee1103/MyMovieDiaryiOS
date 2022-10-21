@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        window?.rootViewController = UINavigationController(rootViewController: MainViewController(viewModel: MovieViewModel(boxOfficeService: MovieDataServices(), naverService: MovieDataServices())))
         window?.makeKeyAndVisible()
     }
 

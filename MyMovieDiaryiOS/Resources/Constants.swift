@@ -8,7 +8,7 @@
 import Foundation
 
 struct Constants {
-    static let kobisKey = Bundle.main.infoDictionary?["KOBIS_API_KEY"] as? String
-    static let naverClientId = Bundle.main.infoDictionary?["NAVER_CLENT_ID"]
-    static let naverClientSecret = Bundle.main.infoDictionary?["NAVER_CLIENT_SECRET"]
+    let kobisKey = "f5eef3421c602c6cb7ea224104795888"
+    let naverClientId = "pQrcK9fOoSR9WT6Pgrk0"
+    let naverClientSecret = "tchXT5lFbO"
 }

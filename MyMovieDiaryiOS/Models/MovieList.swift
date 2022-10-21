@@ -48,7 +48,7 @@ struct Item: Codable {
     let title: String // 영화명
     let link: String // 네이버 영화 정보 URL
     let image: String // 영화 썸네일 URL
-    let subtitle, pubDate, director, actor: String
+    let subtitle, pubDate, director, actor: String // 부제, 제작년도,감독, 배우들
     let userRating: String // 평점
 }
 

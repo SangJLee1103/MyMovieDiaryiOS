@@ -18,6 +18,9 @@
 		F41891E928FFF1E00017E258 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891E528FFF1E00017E258 /* Constants.swift */; };
 		F41891EA28FFF1E00017E258 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F41891E628FFF1E00017E258 /* Debug.xcconfig */; };
 		F41891ED28FFF20E0017E258 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891EC28FFF20E0017E258 /* MovieCell.swift */; };
+		F4A10286290276EB00775066 /* DailyBoxOfficeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A10285290276EB00775066 /* DailyBoxOfficeViewModel.swift */; };
+		F4A1028829028CEE00775066 /* NaverMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1028729028CEE00775066 /* NaverMovieViewModel.swift */; };
+		F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DB34E7290145C400F05905 /* MovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		F41891E528FFF1E00017E258 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F41891E628FFF1E00017E258 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F41891EC28FFF20E0017E258 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		F4A10285290276EB00775066 /* DailyBoxOfficeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeViewModel.swift; sourceTree = "<group>"; };
+		F4A1028729028CEE00775066 /* NaverMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMovieViewModel.swift; sourceTree = "<group>"; };
+		F4DB34E7290145C400F05905 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +62,6 @@
 				C9BB4EAC108C0601FA1C3BAB /* Pods-MyMovieDiaryiOS.debug.xcconfig */,
 				2C5541B73C9F1694CA659A7B /* Pods-MyMovieDiaryiOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -115,6 +120,9 @@
 		F41891DF28FFF1E00017E258 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F4DB34E7290145C400F05905 /* MovieViewModel.swift */,
+				F4A10285290276EB00775066 /* DailyBoxOfficeViewModel.swift */,
+				F4A1028729028CEE00775066 /* NaverMovieViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -269,7 +277,10 @@
 			files = (
 				F41891ED28FFF20E0017E258 /* MovieCell.swift in Sources */,
 				F41891E828FFF1E00017E258 /* MovieDataServices.swift in Sources */,
+				F4A1028829028CEE00775066 /* NaverMovieViewModel.swift in Sources */,
 				F41891DE28FFF1D70017E258 /* MainViewController.swift in Sources */,
+				F4A10286290276EB00775066 /* DailyBoxOfficeViewModel.swift in Sources */,
+				F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */,
 				F41891C928FFF1800017E258 /* AppDelegate.swift in Sources */,
 				F41891E728FFF1E00017E258 /* MovieList.swift in Sources */,
 				F41891CB28FFF1800017E258 /* SceneDelegate.swift in Sources */,
