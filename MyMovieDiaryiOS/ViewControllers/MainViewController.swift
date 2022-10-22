@@ -6,66 +6,55 @@
 //
 
 import UIKit
-import RxSwift
-import RxRelay
+import Combine
 
 class MainViewController: UIViewController {
     
-    let viewModel: MovieViewModel
-    let disposeBag = DisposeBag()
+    var viewModel: MovieViewModel = MovieViewModel()
+    var disposableBag = Set<AnyCancellable>()
     
-    let dailyBoxOfficeViewModel = BehaviorRelay<[DailyBoxOfficeViewModel]>(value: [])
-    let naverMovieViewModel = BehaviorRelay<[NaverMovieViewModel]>(value: [])
+    var boxOfficeResult: [Item] = []
+    var movieRankTitle: [String] = []
     
-    var dailyBoxOfficeVmObserver: Observable<[DailyBoxOfficeViewModel]> {
-        return dailyBoxOfficeViewModel.asObservable()
-    }
-    
-    var naverMovieVmObserver: Observable<[NaverMovieViewModel]> {
-        return naverMovieViewModel.asObservable()
-    }
-    
-    // 의존성 주입
-    init(viewModel: MovieViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    var boxOfficeMovieNm: Array<String> = Array()
     private lazy var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2) , height: 250)
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2 - 20) , height: 250)
         
         let movieChartCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         movieChartCollectionView.backgroundColor = .black
         movieChartCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
-        movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 0)
+        movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
         movieChartCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return movieChartCollectionView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.navigationController?.navigationBar.barTintColor = .black
+        
         setupView()
         setLayout()
-        configureCollectionView()
-        getBoxOffice()
-        subscribe()
-        print(self.boxOfficeMovieNm)
+        setupSearchController()
+        setBindings()
+        
     }
 }
 
 extension MainViewController {
     private func setupView() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .white
+    }
+    
+    func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.searchTextField.backgroundColor = .clear
+        searchController.searchBar.placeholder = "영화를 검색하세요."
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.navigationItem.searchController = searchController
+        self.navigationItem.title = "MyMovieDiary"
+        self.navigationItem.titleView?.backgroundColor = .white
+        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func setLayout() {
@@ -73,10 +62,10 @@ extension MainViewController {
         
         self.view.addSubview(movieCollectionView)
         NSLayoutConstraint.activate ([
-            movieCollectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            movieCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
             movieCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             movieCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            movieCollectionView.heightAnchor.constraint(equalToConstant: 280)
+            movieCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
@@ -86,32 +75,24 @@ extension MainViewController {
     }
 }
 
+// MARK: -뷰모델 관련
 extension MainViewController {
-    
-    // 영화 일일 박스오피스 호출 로직
-    func getBoxOffice() {
-        let kobisParameter: [String: String] = [
-            "key": Constants().kobisKey,
-            "targetDt": "20221018"
-        ]
-
-        self.viewModel.getBoxOffices(parameter: kobisParameter).subscribe(onNext: { dailyBoxOfficeViewModel in
-            self.dailyBoxOfficeViewModel.accept(dailyBoxOfficeViewModel)
-        }).disposed(by: disposeBag)
-    }
-    
-    func getNaverMovie() {
+    fileprivate func setBindings() {
+        self.viewModel.getBoxOffice()
+        
+        // 박스오피스 영화이름
+        viewModel.$movieTitles.sink { (movietitle: [String]) in
+            self.movieRankTitle = movietitle
+        }.store(in: &disposableBag)
         
         
-    }
-    
-    func subscribe() {
-//        self.dailyBoxOfficeVmObserver.subscribe(onNext: { boxOfficeResults in
-//            print(boxOfficeResults)
-//        }).disposed(by: disposeBag)
-        self.dailyBoxOfficeVmObserver.subscribe(onNext: { boxOfficeResults in
-            boxOfficeResults.map{ $0.movieNm}
-        })
+        // 네이버 영화
+        viewModel.$naverMovieList.sink { ( item: [Item]) in
+            if item.count == 10 {
+                self.boxOfficeResult += item
+                self.configureCollectionView()
+            }
+        }.store(in: &disposableBag)
     }
 }
 
@@ -123,7 +104,35 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell  else { return UICollectionViewCell() }
-        cell.prepare(rank: "1위", img: UIImage(systemName: "chevron.left"), title: "ㅋㅋ", grade: "4.5")
+        
+        let movies = self.boxOfficeResult[indexPath.row]
+        
+        DispatchQueue.main.async {
+            cell.prepare(rank: "1위", img: self.getThumbnail(imgUrl: movies.image), title: self.removeCharacter(title: movies.title), grade: movies.userRating)
+        }
+        
         return cell
+        
     }
 }
+
+extension MainViewController {
+    func removeCharacter(title: String) -> String{
+        let titleResult = title.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "")
+        return titleResult
+    }
+    
+    func getThumbnail(imgUrl: String) -> UIImage {
+        let sizeToImgUrl = imgUrl.replacingOccurrences(of: "mit110", with: "mit250")
+        let url = URL(string: sizeToImgUrl)
+        
+        if let data = try? Data(contentsOf: url!) {
+            if let image = UIImage(data: data) {
+                return image
+            }
+        }
+        
+        return UIImage()
+    }
+}
+

@@ -7,36 +7,12 @@
 
 import Foundation
 import Alamofire
-import RxSwift
+import Combine
 
-
-protocol MovieDataServicesProtocol {
-    func getBoxOffice(parameter: Parameters) -> Observable<[DailyBoxOfficeList]>
-    func getNaverMovie(parameter: Parameters) -> Observable<[Item]>
-} 
-
-class MovieDataServices: MovieDataServicesProtocol {
+class MovieDataServices {
     
     private let kobisURL = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
     private let naverURL = "https://openapi.naver.com/v1/search/movie.json"
-    
-    
-    func getBoxOffice(parameter: Parameters) -> Observable<[DailyBoxOfficeList]> {
-        return Observable.create { (observer) -> Disposable in
-            self.getBoxOffice(parameter: parameter) { (response, error) in
-                if let response = response {
-                    observer.onNext(response)
-                }
-                
-                if let error = error {
-                    observer.onError(error)
-                }
-                
-                observer.onCompleted()
-            }
-            return Disposables.create()
-        }
-    }
     
     func getBoxOffice(parameter: Parameters, completion: @escaping ([DailyBoxOfficeList]?, Error?) -> ()) {
         AF.request(kobisURL, method: .get, parameters: parameter, encoding: URLEncoding.default, headers: nil)
@@ -49,24 +25,6 @@ class MovieDataServices: MovieDataServicesProtocol {
                     completion(nil, error)
                 }
             }
-    }
-    
-    
-    func getNaverMovie(parameter: Parameters) -> Observable<[Item]> {
-        return Observable.create { (observer) -> Disposable in
-            self.getNaverMovie(parameter: parameter) { (response, error) in
-                if let response = response {
-                    observer.onNext(response)
-                }
-                
-                if let error = error {
-                    observer.onError(error)
-                }
-                
-                observer.onCompleted()
-            }
-            return Disposables.create()
-        }
     }
     
     
@@ -86,6 +44,5 @@ class MovieDataServices: MovieDataServicesProtocol {
                     completion(nil, error)
                 }
             }
-        
     }
 }

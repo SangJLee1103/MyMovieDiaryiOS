@@ -29,6 +29,7 @@ class MovieCell: UICollectionViewCell {
     let titleLbl: UILabel = {
         let titleLbl = UILabel()
         titleLbl.sizeToFit()
+        titleLbl.numberOfLines = 2
         titleLbl.textAlignment = .center
         titleLbl.textColor = .white
         titleLbl.font = .systemFont(ofSize: 15)
@@ -58,7 +59,7 @@ class MovieCell: UICollectionViewCell {
     }
     
     private func addContentView() {
-        addSubview(rankingLbl)
+//        addSubview(rankingLbl)
         addSubview(imgView)
         addSubview(titleLbl)
         addSubview(gradeLbl)
@@ -66,11 +67,11 @@ class MovieCell: UICollectionViewCell {
     
     private func setLayout(){
         
-        NSLayoutConstraint.activate([
-            rankingLbl.topAnchor.constraint(equalTo: topAnchor),
-            rankingLbl.leadingAnchor.constraint(equalTo: leadingAnchor)
-        ])
-        
+//        NSLayoutConstraint.activate([
+//            rankingLbl.topAnchor.constraint(equalTo: topAnchor),
+//            rankingLbl.leadingAnchor.constraint(equalTo: leadingAnchor)
+//        ])
+//
         NSLayoutConstraint.activate([
             imgView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             imgView.leadingAnchor.constraint(equalTo: leadingAnchor),

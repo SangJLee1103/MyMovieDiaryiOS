@@ -6,38 +6,38 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
 import Alamofire
 
-final class MovieViewModel {
+class MovieViewModel {
+    @Published var naverMovieList: [Item] = []
+    @Published var movieTitles: [String] = []
     
-    private let boxOfficeService:MovieDataServicesProtocol
-    private let naverService: MovieDataServicesProtocol
-    
-    init(boxOfficeService: MovieDataServicesProtocol, naverService: MovieDataServicesProtocol) {
-        self.boxOfficeService = boxOfficeService
-        self.naverService = naverService
+    let kobisParameter: [String: String] = [
+        "key": Constants().kobisKey,
+        "targetDt": "20221018"
+    ]
+}
+
+extension MovieViewModel {
+    func getBoxOffice() {
+        MovieDataServices().getBoxOffice(parameter: kobisParameter) { (boxOffice, error) in
+            if let boxOffice = boxOffice {
+                self.movieTitles = boxOffice.map {$0.movieNm}
+                for i in 0..<boxOffice.count {
+                    let parameter: [String: String] = [
+                        "query": boxOffice.map{ $0.movieNm }[i],
+                        "Display": "1",
+                        "yearfrom":"2022"
+                    ]
+
+                    MovieDataServices().getNaverMovie(parameter: parameter) { (movie, error) in
+                        if let movie = movie { 
+                            self.naverMovieList.append(contentsOf: movie)
+                        }
+                    }
+                }
+            }
+        }
     }
-    
-    
-    func getBoxOffices(parameter: Parameters) -> Observable<[DailyBoxOfficeViewModel]> {
-        boxOfficeService.getBoxOffice(parameter: parameter).map { $0.map {
-            DailyBoxOfficeViewModel(dailyBoxOffice: $0)
-        }}
-    }
-    
-    func getNaverMovie(parameter: Parameters) -> Observable<[NaverMovieViewModel]> {
-        naverService.getNaverMovie(parameter: parameter).map { $0.map {
-            NaverMovieViewModel(item: $0)
-        }}
-    }
-    
-//    func getBoxOfficeAndNaverMovie(parameter: Parameters) -> Observable<[NaverMovieViewModel]> {
-//        boxOfficeService.getBoxOffice(parameter: parameter).flatMap { result in
-//            return  naverService.getNaverMovie(parameter: result.map{ $0.movieNm })
-//
-//        }
-//    }
-    
-    
 }
