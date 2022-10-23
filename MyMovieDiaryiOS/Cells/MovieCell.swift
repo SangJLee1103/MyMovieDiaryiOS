@@ -11,7 +11,7 @@ class MovieCell: UICollectionViewCell {
     
     static let identifier = "MovieCell"
     
-    let rankingLbl: UILabel = {
+    private let rankingLbl: UILabel = {
         let rankingLbl = UILabel()
         rankingLbl.sizeToFit()
         rankingLbl.textColor = .white
@@ -20,13 +20,13 @@ class MovieCell: UICollectionViewCell {
         return rankingLbl
     }()
     
-    let imgView: UIImageView = {
+    private let imgView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
     
-    let titleLbl: UILabel = {
+    private let titleLbl: UILabel = {
         let titleLbl = UILabel()
         titleLbl.sizeToFit()
         titleLbl.numberOfLines = 2
@@ -37,7 +37,7 @@ class MovieCell: UICollectionViewCell {
         return titleLbl
     }()
     
-    let gradeLbl: UILabel = {
+    private let gradeLbl: UILabel = {
         let gradeLbl = UILabel()
         gradeLbl.sizeToFit()
         gradeLbl.textAlignment = .center
@@ -96,6 +96,6 @@ class MovieCell: UICollectionViewCell {
         self.rankingLbl.text = rank
         self.imgView.image = img
         self.titleLbl.text = title
-        self.gradeLbl.text = "⭐️: \(grade)"
+        self.gradeLbl.text = "⭐️ \(grade)"
     }
 }
