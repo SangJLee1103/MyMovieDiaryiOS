@@ -20,7 +20,7 @@ extension MovieViewModel {
     func getBoxOffice() {
         let kobisParameter: [String: String] = [
             "key": Constants().kobisKey,
-            "targetDt": getCurrentDateTime(now: Date())
+            "targetDt": DateUtil.getCurrentDateTime(now: Date())
         ]
         
         MovieDataServices().getBoxOffice(parameter: kobisParameter) { (boxOffice, error) in
@@ -30,28 +30,17 @@ extension MovieViewModel {
                     let parameter: [String: String] = [
                         "query": boxOffice.map{ $0.movieNm }[i],
                         "Display": "1",
-                        "yearfrom":"2022"
+                        "yearfrom": DateUtil.getYear(year: Date())
                     ]
 
                     MovieDataServices().getNaverMovie(parameter: parameter) { (movie, error) in
-                        if let movie = movie { 
+                        if let movie = movie {
                             self.naverMovieList.append(contentsOf: movie)
+                            print(self.naverMovieList)
                         }
                     }
                 }
             }
         }
-    }
-}
-
-// MARK: - 날짜
-extension MovieViewModel {
-    func getCurrentDateTime(now: Date) -> String{
-        let formatter = DateFormatter() //객체 생성
-        let yesterday = now - 86400
-        
-        formatter.dateFormat = "yyyyMMdd" //데이터 포멧 설정
-        let result = formatter.string(from: yesterday)
-        return result
     }
 }

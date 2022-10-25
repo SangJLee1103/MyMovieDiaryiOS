@@ -93,9 +93,11 @@ class MovieCell: UICollectionViewCell {
     }
     
     func prepare(rank: String?, img: UIImage?, title: String, grade: String) {
-        self.rankingLbl.text = rank
-        self.imgView.image = img
-        self.titleLbl.text = title
-        self.gradeLbl.text = "⭐️ \(grade)"
+        DispatchQueue.main.async {
+            self.rankingLbl.text = rank
+            self.imgView.image = img
+            self.titleLbl.text = title
+            self.gradeLbl.text = "⭐️ \(grade)"
+        }
     }
 }

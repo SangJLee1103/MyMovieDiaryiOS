@@ -16,17 +16,27 @@ class MainViewController: UIViewController {
     var boxOfficeResult: [Item] = []
     var movieRankTitle: [String] = []
     
+    // 영화 박스오피스 컬렉션 뷰
     private lazy var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2 - 20) , height: 250)
+        layout.headerReferenceSize = .init(width: 100, height: 30)
         
         let movieChartCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         movieChartCollectionView.backgroundColor = .black
+        movieChartCollectionView.register(MainSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainSupplementaryView.identifier)
         movieChartCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
         movieChartCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return movieChartCollectionView
+    }()
+    
+    // 영화 검색 테이블 뷰
+    private lazy var searchMovieTableView: UITableView = {
+        let searchMovieTableView = UITableView()
+        searchMovieTableView.
+        return searchMovieTableView
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,18 +45,19 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.barTintColor = .black
         
         setupView()
         setLayout()
         setBindings()
         setupSearchController()
+        configureCollectionView()
     }
 }
 
 extension MainViewController {
     private func setupView() {
         self.view.backgroundColor = .black
+        self.navigationController?.navigationBar.barTintColor = .black
     }
     
     func setupSearchController() {
@@ -86,14 +97,15 @@ extension MainViewController {
         // 박스오피스 영화이름
         viewModel.$movieTitles.sink { (movietitle: [String]) in
             self.movieRankTitle = movietitle
+            print(self.movieRankTitle)
         }.store(in: &disposableBag)
         
         
         // 네이버 영화
         viewModel.$naverMovieList.sink { ( item: [Item]) in
             if item.count == 10 {
-                self.boxOfficeResult += item
-                self.configureCollectionView()
+                self.boxOfficeResult = item
+                self.movieCollectionView.reloadData()
             }
         }.store(in: &disposableBag)
     }
@@ -101,7 +113,16 @@ extension MainViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.boxOfficeResult.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MainSupplementaryView.identifier, for: indexPath) as! MainSupplementaryView
+            header.prepare(title: "오늘의 박스오피스")
+            return header
+        }
+        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -110,9 +131,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let movies = self.boxOfficeResult[indexPath.row]
         
-        DispatchQueue.main.async {
-            cell.prepare(rank: "1위", img: ImageUtil.getThumbnail(imgUrl: movies.image), title: StringUtil.removeCharacter(title: movies.title), grade: movies.userRating)
-        }
+        cell.prepare(rank: "1위", img: ImageUtil.getThumbnail(imgUrl: movies.image), title: StringUtil.removeCharacter(title: movies.title), grade: movies.userRating)
         return cell
     }
     

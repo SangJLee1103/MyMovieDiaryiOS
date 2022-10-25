@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieSearchVIewModel {
+class MovieSearchViewModel {
     
     
     

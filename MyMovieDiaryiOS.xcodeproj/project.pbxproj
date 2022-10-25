@@ -17,6 +17,9 @@
 		F41891E828FFF1E00017E258 /* MovieDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891E328FFF1E00017E258 /* MovieDataServices.swift */; };
 		F41891E928FFF1E00017E258 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891E528FFF1E00017E258 /* Constants.swift */; };
 		F41891ED28FFF20E0017E258 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891EC28FFF20E0017E258 /* MovieCell.swift */; };
+		F43DC84B290779E4006438A4 /* MainSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */; };
+		F43DC84D2907A1E1006438A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */; };
+		F43DC8512907CB23006438A4 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DC8502907CB23006438A4 /* SearchMovieCell.swift */; };
 		F4A1028A2904EE7D00775066 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A102892904EE7D00775066 /* MovieDetailViewController.swift */; };
 		F4A1028D2905037F00775066 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1028C2905037F00775066 /* DateUtil.swift */; };
 		F4A1028F2905039800775066 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1028E2905039800775066 /* ImageUtil.swift */; };
@@ -41,6 +44,9 @@
 		F41891E528FFF1E00017E258 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F41891E628FFF1E00017E258 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F41891EC28FFF20E0017E258 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSupplementaryView.swift; sourceTree = "<group>"; };
+		F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F43DC8502907CB23006438A4 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
 		F4A102892904EE7D00775066 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		F4A1028C2905037F00775066 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		F4A1028E2905039800775066 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 				F41891D128FFF1810017E258 /* Assets.xcassets */,
 				F41891D328FFF1810017E258 /* LaunchScreen.storyboard */,
 				F41891D628FFF1810017E258 /* Info.plist */,
+				F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */,
 			);
 			path = MyMovieDiaryiOS;
 			sourceTree = "<group>";
@@ -162,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				F41891EC28FFF20E0017E258 /* MovieCell.swift */,
+				F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */,
+				F43DC8502907CB23006438A4 /* SearchMovieCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 			files = (
 				F41891D528FFF1810017E258 /* LaunchScreen.storyboard in Resources */,
 				F41891D228FFF1810017E258 /* Assets.xcassets in Resources */,
+				F43DC84D2907A1E1006438A4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,10 +309,12 @@
 				F41891C928FFF1800017E258 /* AppDelegate.swift in Sources */,
 				F4A1028F2905039800775066 /* ImageUtil.swift in Sources */,
 				F41891E728FFF1E00017E258 /* MovieList.swift in Sources */,
+				F43DC84B290779E4006438A4 /* MainSupplementaryView.swift in Sources */,
 				F4A10291290506CA00775066 /* StringUtil.swift in Sources */,
 				F41891CB28FFF1800017E258 /* SceneDelegate.swift in Sources */,
 				F4A1028A2904EE7D00775066 /* MovieDetailViewController.swift in Sources */,
 				F41891E928FFF1E00017E258 /* Constants.swift in Sources */,
+				F43DC8512907CB23006438A4 /* SearchMovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
