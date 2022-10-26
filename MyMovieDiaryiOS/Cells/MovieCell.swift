@@ -11,16 +11,7 @@ class MovieCell: UICollectionViewCell {
     
     static let identifier = "MovieCell"
     
-    private let rankingLbl: UILabel = {
-        let rankingLbl = UILabel()
-        rankingLbl.sizeToFit()
-        rankingLbl.textColor = .white
-        rankingLbl.font = .systemFont(ofSize: 15)
-        rankingLbl.translatesAutoresizingMaskIntoConstraints = false
-        return rankingLbl
-    }()
-    
-    private let imgView: UIImageView = {
+    let imgView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
@@ -59,19 +50,12 @@ class MovieCell: UICollectionViewCell {
     }
     
     private func addContentView() {
-//        addSubview(rankingLbl)
         addSubview(imgView)
         addSubview(titleLbl)
         addSubview(gradeLbl)
     }
     
     private func setLayout(){
-        
-//        NSLayoutConstraint.activate([
-//            rankingLbl.topAnchor.constraint(equalTo: topAnchor),
-//            rankingLbl.leadingAnchor.constraint(equalTo: leadingAnchor)
-//        ])
-//
         NSLayoutConstraint.activate([
             imgView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             imgView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -92,10 +76,8 @@ class MovieCell: UICollectionViewCell {
         ])
     }
     
-    func prepare(rank: String?, img: UIImage?, title: String, grade: String) {
+    func prepare(title: String, grade: String) {
         DispatchQueue.main.async {
-            self.rankingLbl.text = rank
-            self.imgView.image = img
             self.titleLbl.text = title
             self.gradeLbl.text = "⭐️ \(grade)"
         }

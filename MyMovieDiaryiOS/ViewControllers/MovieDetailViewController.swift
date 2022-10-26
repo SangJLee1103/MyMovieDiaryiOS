@@ -51,6 +51,14 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setLayout()
+        imageView.contentMode = .scaleToFill
+        ImageUtil.getThumbnail(imgUrl: image) { (image) in
+            DispatchQueue.main.async {
+                if let image = image {
+                    self.imageView.image = image
+                }
+            }
+        }
     }
 }
 
@@ -72,8 +80,6 @@ extension MovieDetailViewController {
             imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             imageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 2.0 / 5.0),
         ])
-        imageView.image = ImageUtil.getThumbnail(imgUrl: self.image)
-        imageView.contentMode = .scaleToFill
         
         view.addSubview(directorLbl)
         NSLayoutConstraint.activate([

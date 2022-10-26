@@ -35,7 +35,9 @@ class MainViewController: UIViewController {
     // 영화 검색 테이블 뷰
     private lazy var searchMovieTableView: UITableView = {
         let searchMovieTableView = UITableView()
-        searchMovieTableView.
+        searchMovieTableView.register(SearchMovieCell.self, forCellReuseIdentifier: SearchMovieCell.identifier)
+        searchMovieTableView.backgroundColor = .black
+        searchMovieTableView.separatorStyle = .none
         return searchMovieTableView
     }()
     
@@ -131,7 +133,14 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let movies = self.boxOfficeResult[indexPath.row]
         
-        cell.prepare(rank: "1위", img: ImageUtil.getThumbnail(imgUrl: movies.image), title: StringUtil.removeCharacter(title: movies.title), grade: movies.userRating)
+        ImageUtil.getThumbnail(imgUrl: movies.image) { (image) in
+            DispatchQueue.main.async {
+                if let image = image {
+                    cell.imgView.image = image
+                }
+            }
+        }
+        cell.prepare(title: StringUtil.removeCharacter(title: movies.title), grade: movies.userRating)
         return cell
     }
     

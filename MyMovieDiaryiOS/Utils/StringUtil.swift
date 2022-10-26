@@ -14,6 +14,7 @@ struct StringUtil {
          return title.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "")
     }
     
+    // 네이버 영화 감독 및 배우 |구분 제거
     static func removePersonCharacter(actor: String) -> String {
         return String(actor.replacingOccurrences(of: "|", with: ", ").dropLast(2))
     }
