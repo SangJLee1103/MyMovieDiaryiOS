@@ -36,7 +36,6 @@ extension MovieViewModel {
                     MovieDataServices().getNaverMovie(parameter: parameter) { (movie, error) in
                         if let movie = movie {
                             self.naverMovieList.append(contentsOf: movie)
-                            print(self.naverMovieList)
                         }
                     }
                 }

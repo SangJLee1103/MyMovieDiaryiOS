@@ -11,12 +11,14 @@ struct ImageUtil {
     static func getThumbnail(imgUrl: String, completion: @escaping (UIImage?) -> ()) {
         DispatchQueue.global().async {
             let sizeToImgUrl = imgUrl.replacingOccurrences(of: "mit110", with: "mit500")
-            let url = URL(string: sizeToImgUrl)
-            
-            if let data = try? Data(contentsOf: url!) {
-                if let image = UIImage(data: data) {
-                    completion(image)
+            if let url = URL(string: sizeToImgUrl) {
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        completion(image)
+                    }
                 }
+            }else {
+                completion(UIImage(named: "thum"))
             }
         }
     }

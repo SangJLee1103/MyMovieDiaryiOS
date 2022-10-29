@@ -10,12 +10,18 @@ import Combine
 
 class MainViewController: UIViewController {
     
-    var viewModel: MovieViewModel = MovieViewModel()
+    var boxOfficeViewModel: MovieViewModel = MovieViewModel()
+    var searchViewModel: MovieSearchViewModel = MovieSearchViewModel()
+    
     var disposableBag = Set<AnyCancellable>()
     
     var boxOfficeResult: [Item] = []
     var movieRankTitle: [String] = []
+    var searchMovieList: [Item] = []
     
+    var searchMode: Bool = false // 검색창 활성화 여부
+    
+    var searchController: UISearchController!
     // 영화 박스오피스 컬렉션 뷰
     private lazy var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -38,6 +44,9 @@ class MainViewController: UIViewController {
         searchMovieTableView.register(SearchMovieCell.self, forCellReuseIdentifier: SearchMovieCell.identifier)
         searchMovieTableView.backgroundColor = .black
         searchMovieTableView.separatorStyle = .none
+        searchMovieTableView.isUserInteractionEnabled = true
+        searchMovieTableView.isScrollEnabled = true
+        searchMovieTableView.translatesAutoresizingMaskIntoConstraints = false
         return searchMovieTableView
     }()
     
@@ -47,15 +56,16 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         setLayout()
         setBindings()
         setupSearchController()
         configureCollectionView()
+        configureTableView()
     }
 }
 
+// MARK: - 레이아웃 관련
 extension MainViewController {
     private func setupView() {
         self.view.backgroundColor = .black
@@ -63,8 +73,10 @@ extension MainViewController {
     }
     
     func setupSearchController() {
-        let searchController = UISearchController(searchResultsController: nil)
-        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
         searchController.searchBar.barStyle = .black
         searchController.searchBar.tintColor = .white
         searchController.searchBar.placeholder = "영화를 검색하세요."
@@ -85,30 +97,51 @@ extension MainViewController {
         ])
     }
     
+    private func searchTableViewLayout(){
+        let safeArea = self.view.safeAreaLayoutGuide
+        
+        self.view.addSubview(searchMovieTableView)
+        NSLayoutConstraint.activate([
+            searchMovieTableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            searchMovieTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            searchMovieTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            searchMovieTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+    }
+    
     func configureCollectionView() {
         self.movieCollectionView.delegate = self
         self.movieCollectionView.dataSource = self
     }
+    
+    func configureTableView() {
+        self.searchMovieTableView.delegate = self
+        self.searchMovieTableView.dataSource = self
+    }
 }
 
-// MARK: -뷰모델 관련
+// MARK: - 뷰모델 관련
 extension MainViewController {
     fileprivate func setBindings() {
-        self.viewModel.getBoxOffice()
+        self.boxOfficeViewModel.getBoxOffice()
         
         // 박스오피스 영화이름
-        viewModel.$movieTitles.sink { (movietitle: [String]) in
+        boxOfficeViewModel.$movieTitles.sink { (movietitle: [String]) in
             self.movieRankTitle = movietitle
-            print(self.movieRankTitle)
         }.store(in: &disposableBag)
         
-        
         // 네이버 영화
-        viewModel.$naverMovieList.sink { ( item: [Item]) in
+        boxOfficeViewModel.$naverMovieList.sink { ( item: [Item]) in
             if item.count == 10 {
                 self.boxOfficeResult = item
                 self.movieCollectionView.reloadData()
             }
+        }.store(in: &disposableBag)
+        
+        // 검색결과
+        searchViewModel.$searchMovieList.sink { (item: [Item]) in
+            self.searchMovieList = item
+            self.searchMovieTableView.reloadData()
         }.store(in: &disposableBag)
     }
 }
@@ -130,7 +163,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell  else { return UICollectionViewCell() }
-        
         let movies = self.boxOfficeResult[indexPath.row]
         
         ImageUtil.getThumbnail(imgUrl: movies.image) { (image) in
@@ -156,4 +188,86 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
+
+// MARK: - UISearchViewController 델리게이트
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if !searchController.isActive {
+            return
+        } else {
+            if searchController.searchBar.text == "" {
+                searchMode = false
+                DispatchQueue.main.async {
+                    self.searchMovieTableView.reloadData()
+                }
+            } else {
+                searchMode = true
+                searchTableViewLayout()
+            }
+        }
+        self.searchMovieList.removeAll()
+        self.searchViewModel.getSearchMovieList(query: searchController.searchBar.text ?? "")
+        DispatchQueue.main.async {
+            self.searchMovieTableView.reloadData()
+        }
+    }
+}
+
+extension MainViewController: UISearchControllerDelegate, UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let search = searchController.searchBar.text {
+        }
+    }
+    
+    // cancel 클릭시 검색 테이블 뷰 제거
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchMovieTableView.removeFromSuperview()
+        self.searchMovieList.removeAll()
+    }
+}
+
+
+// MARK: - 영화 검색결과 테이블 뷰 델리게이트, 데이터소스
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchMovieList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch self.searchMode {
+        case true:
+            let searchList = self.searchMovieList[indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchMovieCell.identifier, for: indexPath) as? SearchMovieCell else { fatalError("no matched articleTableViewCell identifier") }
+            
+            ImageUtil.getThumbnail(imgUrl: searchList.image) { (image) in
+                DispatchQueue.main.async {
+                    if let image = image {
+                        cell.imgView.image = image
+                    }
+                }
+            }
+            cell.movieNameLbl.text = StringUtil.removeCharacter(title: searchList.title)
+            cell.gradeLbl.text = "⭐️ \(searchList.userRating)"
+            cell.actorsLbl.text = StringUtil.removePersonCharacter(actor: searchList.actor)
+            return cell
+        case false:
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("클릭됨")
+        let searchList = self.searchMovieList[indexPath.row]
+        let nextVC = SearchViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    
+    
+}
+
 

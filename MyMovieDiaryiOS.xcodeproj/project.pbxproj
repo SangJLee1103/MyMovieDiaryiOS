@@ -25,6 +25,7 @@
 		F4A1028F2905039800775066 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1028E2905039800775066 /* ImageUtil.swift */; };
 		F4A10291290506CA00775066 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A10290290506CA00775066 /* StringUtil.swift */; };
 		F4A102932905076400775066 /* MovieSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A102922905076400775066 /* MovieSearchViewModel.swift */; };
+		F4C6A05B290A3819006513B3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A05A290A3819006513B3 /* SearchViewController.swift */; };
 		F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DB34E7290145C400F05905 /* MovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		F4A1028E2905039800775066 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		F4A10290290506CA00775066 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
 		F4A102922905076400775066 /* MovieSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewModel.swift; sourceTree = "<group>"; };
+		F4C6A05A290A3819006513B3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F4DB34E7290145C400F05905 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 			children = (
 				F41891DD28FFF1D70017E258 /* MainViewController.swift */,
 				F4A102892904EE7D00775066 /* MovieDetailViewController.swift */,
+				F4C6A05A290A3819006513B3 /* SearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				F4A1028F2905039800775066 /* ImageUtil.swift in Sources */,
 				F41891E728FFF1E00017E258 /* MovieList.swift in Sources */,
 				F43DC84B290779E4006438A4 /* MainSupplementaryView.swift in Sources */,
+				F4C6A05B290A3819006513B3 /* SearchViewController.swift in Sources */,
 				F4A10291290506CA00775066 /* StringUtil.swift in Sources */,
 				F41891CB28FFF1800017E258 /* SceneDelegate.swift in Sources */,
 				F4A1028A2904EE7D00775066 /* MovieDetailViewController.swift in Sources */,
