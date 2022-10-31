@@ -29,13 +29,14 @@ extension MovieViewModel {
                 for i in 0..<boxOffice.count {
                     let parameter: [String: String] = [
                         "query": boxOffice.map{ $0.movieNm }[i],
-                        "Display": "1",
+                        "Display": "20",
                         "yearfrom": DateUtil.getYear(year: Date())
                     ]
-
+                    
                     MovieDataServices().getNaverMovie(parameter: parameter) { (movie, error) in
                         if let movie = movie {
-                            self.naverMovieList.append(contentsOf: movie)
+                            let result = movie.filter { Double($0.userRating)! > 0.0 && StringUtil.removeCharacter(title: $0.title) == boxOffice.map{ $0.movieNm }[i]}
+                            self.naverMovieList.append(result[0])
                         }
                     }
                 }

@@ -22,18 +22,33 @@ class MainViewController: UIViewController {
     var searchMode: Bool = false // 검색창 활성화 여부
     
     var searchController: UISearchController!
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        // Create an indicator.
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.center = self.view.center
+        // Also show the indicator even when the animation is stopped.
+        activityIndicator.hidesWhenStopped = false
+        activityIndicator.color = .white
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+        // Start animation.
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+    
     // 영화 박스오피스 컬렉션 뷰
     private lazy var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2 - 20) , height: 250)
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2 - 30) , height: 250)
         layout.headerReferenceSize = .init(width: 100, height: 30)
         
         let movieChartCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         movieChartCollectionView.backgroundColor = .black
         movieChartCollectionView.register(MainSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainSupplementaryView.identifier)
         movieChartCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
-        movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+        movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 20)
         movieChartCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return movieChartCollectionView
     }()
@@ -51,6 +66,7 @@ class MainViewController: UIViewController {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.hidesBackButton = true
         self.navigationItem.title = "MovieYA"
     }
     
@@ -58,6 +74,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setLayout()
+        self.view.addSubview(self.activityIndicator)
         setBindings()
         setupSearchController()
         configureCollectionView()
@@ -134,6 +151,7 @@ extension MainViewController {
         boxOfficeViewModel.$naverMovieList.sink { ( item: [Item]) in
             if item.count == 10 {
                 self.boxOfficeResult = item
+//                boxOfficeResult.sort { movieRankTitle.index(after: $0) > movieRankTitle.index(after: $1) }
                 self.movieCollectionView.reloadData()
             }
         }.store(in: &disposableBag)
@@ -173,6 +191,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         cell.prepare(title: StringUtil.removeCharacter(title: movies.title), grade: movies.userRating)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
         return cell
     }
     
@@ -242,7 +262,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         case true:
             let searchList = self.searchMovieList[indexPath.row]
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchMovieCell.identifier, for: indexPath) as? SearchMovieCell else { fatalError("no matched articleTableViewCell identifier") }
-            
+            cell.selectionStyle = .none
             ImageUtil.getThumbnail(imgUrl: searchList.image) { (image) in
                 DispatchQueue.main.async {
                     if let image = image {
@@ -252,7 +272,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.movieNameLbl.text = StringUtil.removeCharacter(title: searchList.title)
             cell.gradeLbl.text = "⭐️ \(searchList.userRating)"
-            cell.actorsLbl.text = StringUtil.removePersonCharacter(actor: searchList.actor)
+            cell.actorsLbl.text = "출연: \(StringUtil.removePersonCharacter(actor: searchList.actor))"
             return cell
         case false:
             return UITableViewCell()
@@ -260,14 +280,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("클릭됨")
         let searchList = self.searchMovieList[indexPath.row]
-        let nextVC = SearchViewController()
+        let nextVC = MovieDetailViewController()
+        nextVC.image = searchList.image
+        nextVC.movieTitle = StringUtil.removeCharacter(title: searchList.title)
+        nextVC.actor = StringUtil.removePersonCharacter(actor: searchList.actor)
+        nextVC.director = StringUtil.removePersonCharacter(actor: searchList.director)
+        nextVC.userRating = searchList.userRating
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
-    
-    
 }
 
 

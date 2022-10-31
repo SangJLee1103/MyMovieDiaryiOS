@@ -31,7 +31,7 @@ class SearchMovieCell: UITableViewCell {
         let gradeLbl = UILabel()
         gradeLbl.sizeToFit()
         gradeLbl.textColor = .white
-        gradeLbl.font = .systemFont(ofSize: 14)
+        gradeLbl.font = .systemFont(ofSize: 13)
         gradeLbl.translatesAutoresizingMaskIntoConstraints = false
         return gradeLbl
     }()
@@ -40,7 +40,7 @@ class SearchMovieCell: UITableViewCell {
         let actorsLbl = UILabel()
         actorsLbl.sizeToFit()
         actorsLbl.textColor = .white
-        actorsLbl.font = .systemFont(ofSize: 14)
+        actorsLbl.font = .systemFont(ofSize: 13)
         actorsLbl.translatesAutoresizingMaskIntoConstraints = false
         return actorsLbl
     }()

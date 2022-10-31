@@ -26,7 +26,7 @@ final class MainSupplementaryView: UICollectionReusableView {
         addSubview(self.titleLbl)
         NSLayoutConstraint.activate([
             self.titleLbl.topAnchor.constraint(equalTo: topAnchor),
-            self.titleLbl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            self.titleLbl.leadingAnchor.constraint(equalTo: leadingAnchor),
             self.titleLbl.trailingAnchor.constraint(equalTo: trailingAnchor),
             self.titleLbl.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])

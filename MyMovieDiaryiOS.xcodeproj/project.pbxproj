@@ -26,6 +26,8 @@
 		F4A10291290506CA00775066 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A10290290506CA00775066 /* StringUtil.swift */; };
 		F4A102932905076400775066 /* MovieSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A102922905076400775066 /* MovieSearchViewModel.swift */; };
 		F4C6A05B290A3819006513B3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A05A290A3819006513B3 /* SearchViewController.swift */; };
+		F4C6A05D290E3A5D006513B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */; };
+		F4C6A1F4290E8A69006513B3 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C6A1F3290E8A69006513B3 /* KakaoOpenSDK.framework */; };
 		F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DB34E7290145C400F05905 /* MovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,9 @@
 		F4A10290290506CA00775066 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
 		F4A102922905076400775066 /* MovieSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewModel.swift; sourceTree = "<group>"; };
 		F4C6A05A290A3819006513B3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F4C6A1F3290E8A69006513B3 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		F4C6A1F5290E8C7F006513B3 /* KakaoOpenSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KakaoOpenSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4DB34E7290145C400F05905 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1E43E009BF4559153C06C2 /* Pods_MyMovieDiaryiOS.framework in Frameworks */,
+				F4C6A1F4290E8A69006513B3 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +87,7 @@
 		EE335A1473CB5EC9B03CAA86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4C6A1F3290E8A69006513B3 /* KakaoOpenSDK.framework */,
 				B75CF9E7F790D31700C1DDD0 /* Pods_MyMovieDiaryiOS.framework */,
 			);
 			name = Frameworks;
@@ -89,6 +96,7 @@
 		F41891BC28FFF1800017E258 = {
 			isa = PBXGroup;
 			children = (
+				F4C6A1F5290E8C7F006513B3 /* KakaoOpenSDK-Bridging-Header.h */,
 				F41891C728FFF1800017E258 /* MyMovieDiaryiOS */,
 				F41891C628FFF1800017E258 /* Products */,
 				265A1A0DDAD053CA2FC68564 /* Pods */,
@@ -130,6 +138,7 @@
 				F41891DD28FFF1D70017E258 /* MainViewController.swift */,
 				F4A102892904EE7D00775066 /* MovieDetailViewController.swift */,
 				F4C6A05A290A3819006513B3 /* SearchViewController.swift */,
+				F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -316,6 +325,7 @@
 				F4C6A05B290A3819006513B3 /* SearchViewController.swift in Sources */,
 				F4A10291290506CA00775066 /* StringUtil.swift in Sources */,
 				F41891CB28FFF1800017E258 /* SceneDelegate.swift in Sources */,
+				F4C6A05D290E3A5D006513B3 /* LoginViewController.swift in Sources */,
 				F4A1028A2904EE7D00775066 /* MovieDetailViewController.swift in Sources */,
 				F41891E928FFF1E00017E258 /* Constants.swift in Sources */,
 				F43DC8512907CB23006438A4 /* SearchMovieCell.swift in Sources */,
@@ -459,6 +469,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BFTA9SX898;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyMovieDiaryiOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -470,9 +485,56 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreInternal\"",
+					"-framework",
+					"\"FirebaseInstallations\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleAppMeasurementIdentitySupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxRelay\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"nanopb\"",
+					"-all_Load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.petmily.MyMovieDiaryiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -487,6 +549,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BFTA9SX898;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyMovieDiaryiOS/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -498,9 +565,56 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreInternal\"",
+					"-framework",
+					"\"FirebaseInstallations\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleAppMeasurementIdentitySupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxRelay\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"nanopb\"",
+					"-all_Load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.petmily.MyMovieDiaryiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
