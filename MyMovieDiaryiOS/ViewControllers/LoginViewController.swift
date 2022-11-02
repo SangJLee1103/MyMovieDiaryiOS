@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         return titleLbl
     }()
     
-    private let idField: UITextField = {
+    let idField: UITextField = {
         let idField = UITextField()
         idField.borderStyle = .roundedRect
         idField.backgroundColor = .darkGray
@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
         return idField
     }()
     
-    private let pwField: UITextField = {
+    let pwField: UITextField = {
         let pwField = UITextField()
         pwField.borderStyle = .roundedRect
         pwField.backgroundColor = .darkGray
@@ -180,9 +180,39 @@ extension LoginViewController {
 }
 
 extension LoginViewController {
+    
+    // 로그인
     @objc func login(_ sender: UIButton) {
-        let nextVC = MainViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if let email = idField.text, let password = pwField.text {
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                if let e = error {
+                    print(e)
+                    let font: UIFont = .systemFont(ofSize: 14)
+                    let text = "입력하신 아이디 또는 비밀번호가 일치하지 않습니다."
+                    let attributeString = NSMutableAttributedString(string: text)
+                    attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "\(text)")) // 폰트 적용.
+                    let alert = UIAlertController(title: text , message: "", preferredStyle: .alert)
+                    alert.setValue(attributeString, forKey: "attributedTitle")
+                    let action = UIAlertAction(title: "확인", style: .default)
+                    alert.addAction(action)
+                    self?.present(alert, animated: false)
+                } else {
+                    let nextVC = MainViewController()
+                    self?.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
+        }
+    }
+    
+    // 회원가입 페이지로
+    @objc func join(_ sender: UIButton) {
+        
+    }
+    
+    // 비밀번호 재설정
+    @objc func findPw(_ sender: UIButton) {
+        
+        
     }
 }
 
