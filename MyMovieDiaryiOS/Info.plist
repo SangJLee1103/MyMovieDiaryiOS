@@ -2,8 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NAVER_CLIENT_SECRET</key>
+	<string>${NAVER_CLIENT_SECRET}</string>
+	<key>NAVER_CLIENT_ID</key>
+	<string>${NAVER_CLIENT_ID}</string>
+	<key>KOBIS_API_KEY</key>
+	<string>${KOBIS_API_KEY}</string>
 	<key>KAKAO_APP_KEY</key>
-	<string>c38b8cc602bf7741d30222bdfdc29647</string>
+	<string>${KAKAO_APP_KEY}</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -11,7 +17,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakaoc38b8cc602bf7741d30222bdfdc29647</string>
+				<string>kakao${KAKAO_APP_KEY}</string>
 			</array>
 		</dict>
 	</array>

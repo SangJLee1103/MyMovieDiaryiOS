@@ -19,7 +19,7 @@ class MovieViewModel {
 extension MovieViewModel {
     func getBoxOffice() {
         let kobisParameter: [String: String] = [
-            "key": Constants().kobisKey,
+            "key": Constants.kobisKey,
             "targetDt": DateUtil.getCurrentDateTime(now: Date())
         ]
         
@@ -42,5 +42,10 @@ extension MovieViewModel {
                 }
             }
         }
+        
+        // 영화 박스오피스 순위에 따른 정렬
+       
+        
+
     }
 }

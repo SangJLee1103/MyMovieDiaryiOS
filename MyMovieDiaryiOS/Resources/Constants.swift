@@ -8,7 +8,8 @@
 import Foundation
 
 struct Constants {
-    let kobisKey = "f5eef3421c602c6cb7ea224104795888"
-    let naverClientId = "pQrcK9fOoSR9WT6Pgrk0"
-    let naverClientSecret = "tchXT5lFbO"
+    static let kobisKey = Bundle.main.infoDictionary?["KOBIS_API_KEY"] as? String ?? ""
+    static let naverClientId = Bundle.main.infoDictionary?["NAVER_CLIENT_ID"] as? String ?? ""
+    static let naverClientSecret = Bundle.main.infoDictionary?["NAVER_CLIENT_SECRET"] as? String ?? ""
+    static let kakaoKey = Bundle.main.infoDictionary?["KAKAO_APP_KEY"] as? String ?? ""
 }

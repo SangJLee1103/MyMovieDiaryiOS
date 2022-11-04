@@ -12,6 +12,6 @@ target 'MyMovieDiaryiOS' do
   pod 'RxCocoa', '6.5.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
-  pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
 end

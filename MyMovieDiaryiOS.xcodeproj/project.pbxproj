@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F1E43E009BF4559153C06C2 /* Pods_MyMovieDiaryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75CF9E7F790D31700C1DDD0 /* Pods_MyMovieDiaryiOS.framework */; };
 		F41891C928FFF1800017E258 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891C828FFF1800017E258 /* AppDelegate.swift */; };
 		F41891CB28FFF1800017E258 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891CA28FFF1800017E258 /* SceneDelegate.swift */; };
 		F41891D228FFF1810017E258 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F41891D128FFF1810017E258 /* Assets.xcassets */; };
@@ -17,6 +16,7 @@
 		F41891E828FFF1E00017E258 /* MovieDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891E328FFF1E00017E258 /* MovieDataServices.swift */; };
 		F41891E928FFF1E00017E258 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891E528FFF1E00017E258 /* Constants.swift */; };
 		F41891ED28FFF20E0017E258 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41891EC28FFF20E0017E258 /* MovieCell.swift */; };
+		F4333492291393AA002A5748 /* BottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4333491291393AA002A5748 /* BottomButton.swift */; };
 		F43DC84B290779E4006438A4 /* MainSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */; };
 		F43DC84D2907A1E1006438A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */; };
 		F43DC8512907CB23006438A4 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DC8502907CB23006438A4 /* SearchMovieCell.swift */; };
@@ -30,12 +30,13 @@
 		F4C6A05D290E3A5D006513B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */; };
 		F4C6A1F4290E8A69006513B3 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C6A1F3290E8A69006513B3 /* KakaoOpenSDK.framework */; };
 		F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DB34E7290145C400F05905 /* MovieViewModel.swift */; };
+		FD9D26C51B73BDB84840C3A1 /* Pods_MyMovieDiaryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C079BFF2B62E06DC1B5D7459 /* Pods_MyMovieDiaryiOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C5541B73C9F1694CA659A7B /* Pods-MyMovieDiaryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieDiaryiOS.release.xcconfig"; path = "Target Support Files/Pods-MyMovieDiaryiOS/Pods-MyMovieDiaryiOS.release.xcconfig"; sourceTree = "<group>"; };
-		B75CF9E7F790D31700C1DDD0 /* Pods_MyMovieDiaryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMovieDiaryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9BB4EAC108C0601FA1C3BAB /* Pods-MyMovieDiaryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieDiaryiOS.debug.xcconfig"; path = "Target Support Files/Pods-MyMovieDiaryiOS/Pods-MyMovieDiaryiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B29BF826444E0E2855962C9B /* Pods-MyMovieDiaryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieDiaryiOS.release.xcconfig"; path = "Target Support Files/Pods-MyMovieDiaryiOS/Pods-MyMovieDiaryiOS.release.xcconfig"; sourceTree = "<group>"; };
+		C079BFF2B62E06DC1B5D7459 /* Pods_MyMovieDiaryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMovieDiaryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD084652FC3017F7DCDEBD90 /* Pods-MyMovieDiaryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieDiaryiOS.debug.xcconfig"; path = "Target Support Files/Pods-MyMovieDiaryiOS/Pods-MyMovieDiaryiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F41891C528FFF1800017E258 /* MyMovieDiaryiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMovieDiaryiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41891C828FFF1800017E258 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F41891CA28FFF1800017E258 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		F41891E528FFF1E00017E258 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F41891E628FFF1E00017E258 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F41891EC28FFF20E0017E258 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		F4333491291393AA002A5748 /* BottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButton.swift; sourceTree = "<group>"; };
 		F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSupplementaryView.swift; sourceTree = "<group>"; };
 		F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F43DC8502907CB23006438A4 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
@@ -69,8 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F1E43E009BF4559153C06C2 /* Pods_MyMovieDiaryiOS.framework in Frameworks */,
 				F4C6A1F4290E8A69006513B3 /* KakaoOpenSDK.framework in Frameworks */,
+				FD9D26C51B73BDB84840C3A1 /* Pods_MyMovieDiaryiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,8 +82,8 @@
 		265A1A0DDAD053CA2FC68564 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C9BB4EAC108C0601FA1C3BAB /* Pods-MyMovieDiaryiOS.debug.xcconfig */,
-				2C5541B73C9F1694CA659A7B /* Pods-MyMovieDiaryiOS.release.xcconfig */,
+				CD084652FC3017F7DCDEBD90 /* Pods-MyMovieDiaryiOS.debug.xcconfig */,
+				B29BF826444E0E2855962C9B /* Pods-MyMovieDiaryiOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -90,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				F4C6A1F3290E8A69006513B3 /* KakaoOpenSDK.framework */,
-				B75CF9E7F790D31700C1DDD0 /* Pods_MyMovieDiaryiOS.framework */,
+				C079BFF2B62E06DC1B5D7459 /* Pods_MyMovieDiaryiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,6 +119,7 @@
 		F41891C728FFF1800017E258 /* MyMovieDiaryiOS */ = {
 			isa = PBXGroup;
 			children = (
+				F433348E29137C41002A5748 /* Views */,
 				F4A1028B2905032100775066 /* Utils */,
 				F41891EB28FFF20E0017E258 /* Cells */,
 				F41891E028FFF1E00017E258 /* Models */,
@@ -137,11 +140,8 @@
 		F41891DC28FFF1D70017E258 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F41891DD28FFF1D70017E258 /* MainViewController.swift */,
-				F4A102892904EE7D00775066 /* MovieDetailViewController.swift */,
-				F4C6A05A290A3819006513B3 /* SearchViewController.swift */,
-				F4985E7A2910C523001A58E3 /* JoinViewController.swift */,
-				F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */,
+				F433348A2912A99B002A5748 /* Auth */,
+				F433348D29137C15002A5748 /* Main */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -190,6 +190,33 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F433348A2912A99B002A5748 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F4985E7A2910C523001A58E3 /* JoinViewController.swift */,
+				F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F433348D29137C15002A5748 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F41891DD28FFF1D70017E258 /* MainViewController.swift */,
+				F4A102892904EE7D00775066 /* MovieDetailViewController.swift */,
+				F4C6A05A290A3819006513B3 /* SearchViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F433348E29137C41002A5748 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F4333491291393AA002A5748 /* BottomButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F4A1028B2905032100775066 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,11 +234,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F41891D928FFF1810017E258 /* Build configuration list for PBXNativeTarget "MyMovieDiaryiOS" */;
 			buildPhases = (
-				625592213FFEAE0822B7086F /* [CP] Check Pods Manifest.lock */,
+				0BB773430D733171F227DF5C /* [CP] Check Pods Manifest.lock */,
 				F41891C128FFF1800017E258 /* Sources */,
 				F41891C228FFF1800017E258 /* Frameworks */,
 				F41891C328FFF1800017E258 /* Resources */,
-				9A9EC8102BBFAEC4FF884D5D /* [CP] Embed Pods Frameworks */,
+				2D448A6E2E4EA3F51BD072A7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -269,7 +296,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		625592213FFEAE0822B7086F /* [CP] Check Pods Manifest.lock */ = {
+		0BB773430D733171F227DF5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -291,7 +318,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9A9EC8102BBFAEC4FF884D5D /* [CP] Embed Pods Frameworks */ = {
+		2D448A6E2E4EA3F51BD072A7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,6 +347,7 @@
 				F41891E828FFF1E00017E258 /* MovieDataServices.swift in Sources */,
 				F4A102932905076400775066 /* MovieSearchViewModel.swift in Sources */,
 				F4985E7B2910C523001A58E3 /* JoinViewController.swift in Sources */,
+				F4333492291393AA002A5748 /* BottomButton.swift in Sources */,
 				F41891DE28FFF1D70017E258 /* MainViewController.swift in Sources */,
 				F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */,
 				F41891C928FFF1800017E258 /* AppDelegate.swift in Sources */,
@@ -352,6 +380,7 @@
 /* Begin XCBuildConfiguration section */
 		F41891D728FFF1810017E258 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F41891E628FFF1E00017E258 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -407,6 +436,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -446,6 +476,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -460,14 +491,15 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
 		F41891DA28FFF1810017E258 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9BB4EAC108C0601FA1C3BAB /* Pods-MyMovieDiaryiOS.debug.xcconfig */;
+			baseConfigurationReference = F41891E628FFF1E00017E258 /* Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -540,19 +572,20 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		F41891DB28FFF1810017E258 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C5541B73C9F1694CA659A7B /* Pods-MyMovieDiaryiOS.release.xcconfig */;
+			baseConfigurationReference = B29BF826444E0E2855962C9B /* Pods-MyMovieDiaryiOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BFTA9SX898;
+				DEVELOPMENT_TEAM = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -617,10 +650,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.petmily.MyMovieDiaryiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "KakaoOpenSDK-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

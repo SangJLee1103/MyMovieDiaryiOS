@@ -11,7 +11,7 @@ struct StringUtil {
     
     // 네이버 영화 타이틀 <b></b>제거
     static func removeCharacter(title: String) -> String {
-        return title.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "&apos;", with: "'")
+        return title.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "&apos;", with: "'").replacingOccurrences(of: "&amp;", with: "&")
     }
     
     // 네이버 영화 감독 및 배우 |구분 제거
