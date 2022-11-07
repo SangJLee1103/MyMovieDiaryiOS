@@ -41,14 +41,14 @@ class MainViewController: UIViewController {
     private lazy var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2 - 30) , height: 250)
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2 - 30) , height: 300)
         layout.headerReferenceSize = .init(width: 100, height: 30)
         
         let movieChartCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         movieChartCollectionView.backgroundColor = .black
         movieChartCollectionView.register(MainSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainSupplementaryView.identifier)
         movieChartCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
-        movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 20)
+        movieChartCollectionView.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         movieChartCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return movieChartCollectionView
     }()
@@ -151,7 +151,6 @@ extension MainViewController {
         boxOfficeViewModel.$naverMovieList.sink { ( item: [Item]) in
             if item.count == 10 {
                 self.boxOfficeResult = item
-//                boxOfficeResult.sort { movieRankTitle.index(after: $0) > movieRankTitle.index(after: $1) }
                 self.movieCollectionView.reloadData()
             }
         }.store(in: &disposableBag)
@@ -164,6 +163,8 @@ extension MainViewController {
     }
 }
 
+
+// MARK: - 컬렉션 뷰 관련
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.boxOfficeResult.count
@@ -232,6 +233,7 @@ extension MainViewController: UISearchResultsUpdating {
         }
     }
 }
+
 
 extension MainViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

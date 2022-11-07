@@ -7,7 +7,8 @@
 
 import UIKit
 import Firebase
-import KakaoOpenSDK
+import FirebaseAuth
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     
@@ -73,24 +74,44 @@ class LoginViewController: UIViewController {
         return findPwBtn
     }()
     
-    let kakaoBtn: UIButton = {
-        let kakaoBtn = UIButton()
-        kakaoBtn.setImage(.init(named: "kakao_login_large_wide"), for: .normal)
-        kakaoBtn.imageView?.sizeToFit()
-        kakaoBtn.contentVerticalAlignment = .fill
-        kakaoBtn.contentHorizontalAlignment = .fill
-        kakaoBtn.translatesAutoresizingMaskIntoConstraints = false
-        return kakaoBtn
+    let leftLineView: UIView = {
+        let lineView = UIView()
+        lineView.backgroundColor = .white
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        return lineView
+    }()
+    
+    let rightLineView: UIView = {
+        let lineView = UIView()
+        lineView.backgroundColor = .white
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        return lineView
+    }()
+    
+    let snsLoginLbl: UILabel = {
+        let snsLoginLbl = UILabel()
+        snsLoginLbl.sizeToFit()
+        snsLoginLbl.textColor = .white
+        snsLoginLbl.font = .systemFont(ofSize: 13, weight: .thin)
+        snsLoginLbl.text = "SNS 계졍으로 로그인"
+        snsLoginLbl.translatesAutoresizingMaskIntoConstraints = false
+        return snsLoginLbl
+    }()
+    
+    let googleBtn: UIButton = {
+        let googleBtn = UIButton()
+        googleBtn.setImage(.init(named: "google"), for: .normal)
+        googleBtn.translatesAutoresizingMaskIntoConstraints = false
+        return googleBtn
     }()
     
     let appleBtn: UIButton = {
         let appleBtn = UIButton()
-        appleBtn.setImage(.init(named: "appleid_button"), for: .normal)
-        appleBtn.contentVerticalAlignment = .fill
-        appleBtn.contentHorizontalAlignment = .fill
+        appleBtn.setImage(.init(named: "apple"), for: .normal)
         appleBtn.translatesAutoresizingMaskIntoConstraints = false
         return appleBtn
     }()
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -109,7 +130,7 @@ class LoginViewController: UIViewController {
         loginBtn.addTarget(self, action: #selector(login), for: .touchUpInside)
         joinBtn.addTarget(self, action: #selector(join), for: .touchUpInside)
         findPwBtn.addTarget(self, action: #selector(findPw), for: .touchUpInside)
-        kakaoBtn.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
+        googleBtn.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
     }
 }
 
@@ -132,24 +153,24 @@ extension LoginViewController {
         NSLayoutConstraint.activate([
             emailField.heightAnchor.constraint(equalToConstant: 45),
             emailField.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 40),
-            emailField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            emailField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            emailField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            emailField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         view.addSubview(pwField)
         NSLayoutConstraint.activate([
             pwField.heightAnchor.constraint(equalToConstant: 45),
             pwField.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 20),
-            pwField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            pwField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            pwField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            pwField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         view.addSubview(loginBtn)
         NSLayoutConstraint.activate([
             loginBtn.heightAnchor.constraint(equalToConstant: 45),
             loginBtn.topAnchor.constraint(equalTo: pwField.bottomAnchor, constant: 20),
-            loginBtn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            loginBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            loginBtn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            loginBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         view.addSubview(joinBtn)
@@ -164,21 +185,44 @@ extension LoginViewController {
             findPwBtn.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 40)
         ])
         
-        view.addSubview(kakaoBtn)
+        view.addSubview(snsLoginLbl)
         NSLayoutConstraint.activate([
-            kakaoBtn.heightAnchor.constraint(equalToConstant: 45),
-            kakaoBtn.topAnchor.constraint(equalTo: joinBtn.bottomAnchor, constant: 50),
-            kakaoBtn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            kakaoBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            snsLoginLbl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: (self.view.frame.height / 3) * 2 - 40),
+            snsLoginLbl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
         
-//        view.addSubview(appleBtn)
-//        NSLayoutConstraint.activate([
-//            appleBtn.heightAnchor.constraint(equalToConstant: 45),
-//            appleBtn.topAnchor.constraint(equalTo: kakaoBtn.bottomAnchor, constant: 20),
-//            appleBtn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50),
-//            appleBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50)
-//        ])
+        view.addSubview(leftLineView)
+        NSLayoutConstraint.activate([
+            leftLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            leftLineView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: (self.view.frame.height / 3) * 2 - 33),
+            leftLineView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            leftLineView.trailingAnchor.constraint(equalTo: snsLoginLbl.leadingAnchor, constant: -10)
+        ])
+        
+        view.addSubview(rightLineView)
+        NSLayoutConstraint.activate([
+            rightLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            rightLineView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: (self.view.frame.height / 3) * 2 - 33),
+            rightLineView.leadingAnchor.constraint(equalTo: snsLoginLbl.trailingAnchor, constant: 10),
+            rightLineView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
+        ])
+        
+        view.addSubview(googleBtn)
+        NSLayoutConstraint.activate([
+            googleBtn.widthAnchor.constraint(equalToConstant: 60),
+            googleBtn.heightAnchor.constraint(equalToConstant: 60),
+            googleBtn.topAnchor.constraint(equalTo: snsLoginLbl.bottomAnchor, constant: 10),
+            googleBtn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 80),
+        ])
+        
+        view.addSubview(appleBtn)
+        NSLayoutConstraint.activate([
+            appleBtn.widthAnchor.constraint(equalToConstant: 60),
+            appleBtn.heightAnchor.constraint(equalToConstant: 60),
+            appleBtn.topAnchor.constraint(equalTo: snsLoginLbl.bottomAnchor, constant: 10),
+            appleBtn.leadingAnchor.constraint(equalTo: googleBtn.trailingAnchor, constant: 10),
+        ])
+        
     }
 }
 
@@ -237,10 +281,51 @@ extension LoginViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func kakaoLogin(_ sender: UIButton) {
+    // 구글 로그인 버튼 클릭시
+    @objc func googleLogin(_ sender: UIButton) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+            if let error = error {
+                print("구글 로그인 실패")
+                return
+            }
+            
+            guard
+                let authentication = user?.authentication,
+                let idToken = authentication.idToken
+            else {
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+            
+            Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+                if let e = error {
+                    print(e)
+                    let font: UIFont = .systemFont(ofSize: 14)
+                    let text = "구글 로그인에 실패하셨습니다."
+                    let attributeString = NSMutableAttributedString(string: text)
+                    attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "\(text)")) // 폰트 적용.
+                    let alert = UIAlertController(title: text , message: "", preferredStyle: .alert)
+                    alert.setValue(attributeString, forKey: "attributedTitle")
+                    let action = UIAlertAction(title: "확인", style: .default)
+                    alert.addAction(action)
+                    self?.present(alert, animated: false)
+                } else {
+                    let nextVC = MainViewController()
+                    self?.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
+        }
         
     }
 }
+
 
 // MARK: 버튼 밑줄을 위한 확장
 extension UIButton {

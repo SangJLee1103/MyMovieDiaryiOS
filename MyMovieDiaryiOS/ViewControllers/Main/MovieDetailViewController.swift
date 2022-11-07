@@ -46,6 +46,13 @@ class MovieDetailViewController: UIViewController {
         return actorLbl
     }()
     
+    let recordBtn: BottomButton = {
+        let recordBtn = BottomButton()
+        recordBtn.setButtonStyle(title: "기록하기")
+        recordBtn.translatesAutoresizingMaskIntoConstraints = false
+        return recordBtn
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +85,7 @@ extension MovieDetailViewController {
             imageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             imageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 2.0 / 5.0),
+            imageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 4.0 / 10.0),
         ])
         
         view.addSubview(directorLbl)
@@ -87,6 +94,7 @@ extension MovieDetailViewController {
             directorLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
         ])
         directorLbl.text = "감독  \(self.director)"
+        
         
         if actor.count > 0 {
             view.addSubview(actorLbl)
@@ -98,6 +106,14 @@ extension MovieDetailViewController {
             ])
             actorLbl.text = "출연  \(self.actor)"
         }
+        
+        view.addSubview(recordBtn)
+        NSLayoutConstraint.activate([
+            recordBtn.topAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
+            recordBtn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            recordBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            recordBtn.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
     }
 }
 

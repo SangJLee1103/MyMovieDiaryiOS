@@ -23,7 +23,7 @@ class MovieCell: UICollectionViewCell {
         titleLbl.numberOfLines = 2
         titleLbl.textAlignment = .center
         titleLbl.textColor = .white
-        titleLbl.font = .systemFont(ofSize: 15)
+        titleLbl.font = .systemFont(ofSize: 15, weight: .bold)
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         return titleLbl
     }()
@@ -60,7 +60,7 @@ class MovieCell: UICollectionViewCell {
             imgView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             imgView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imgView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imgView.heightAnchor.constraint(equalToConstant: 180)
+            imgView.heightAnchor.constraint(equalToConstant: 220)
         ])
         
         NSLayoutConstraint.activate([

@@ -6,12 +6,10 @@ target 'MyMovieDiaryiOS' do
   use_frameworks!
   
   # Pods for MyMovieDiaryiOS
-
   pod 'Alamofire'
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
   pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'
 end

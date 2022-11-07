@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseStorage
 
 class JoinViewController: UIViewController {
     
@@ -110,6 +109,7 @@ class JoinViewController: UIViewController {
     
     let joinButton: BottomButton = {
         let joinButton = BottomButton()
+        joinButton.setButtonStyle(title: "회원가입")
         joinButton.translatesAutoresizingMaskIntoConstraints = false
         return joinButton
     }()
@@ -135,15 +135,15 @@ extension JoinViewController {
         view.addSubview(emailLbl)
         NSLayoutConstraint.activate([
             emailLbl.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 30),
-            emailLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
+            emailLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40)
         ])
         
         view.addSubview(emailField)
         NSLayoutConstraint.activate([
             emailField.heightAnchor.constraint(equalToConstant: 45),
             emailField.topAnchor.constraint(equalTo: emailLbl.bottomAnchor, constant: 15),
-            emailField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            emailField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            emailField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            emailField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         emailField.addSubview(emailDuplicationBtn)
@@ -155,37 +155,37 @@ extension JoinViewController {
         view.addSubview(pwLbl)
         NSLayoutConstraint.activate([
             pwLbl.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 30),
-            pwLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
+            pwLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40)
         ])
         
         view.addSubview(pwField)
         NSLayoutConstraint.activate([
             pwField.heightAnchor.constraint(equalToConstant: 45),
             pwField.topAnchor.constraint(equalTo: pwLbl.bottomAnchor, constant: 15),
-            pwField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            pwField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            pwField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            pwField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         view.addSubview(pwReField)
         NSLayoutConstraint.activate([
             pwReField.heightAnchor.constraint(equalToConstant: 45),
             pwReField.topAnchor.constraint(equalTo: pwField.bottomAnchor, constant: 10),
-            pwReField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            pwReField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            pwReField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            pwReField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         view.addSubview(nicknameLbl)
         NSLayoutConstraint.activate([
             nicknameLbl.topAnchor.constraint(equalTo: pwReField.bottomAnchor, constant: 30),
-            nicknameLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
+            nicknameLbl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40)
         ])
         
         view.addSubview(nicknameField)
         NSLayoutConstraint.activate([
             nicknameField.heightAnchor.constraint(equalToConstant: 45),
             nicknameField.topAnchor.constraint(equalTo: nicknameLbl.bottomAnchor, constant: 15),
-            nicknameField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            nicknameField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+            nicknameField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
+            nicknameField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
         nicknameField.addSubview(nicknameDuplicationBtn)
@@ -202,7 +202,6 @@ extension JoinViewController {
             joinButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             joinButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
-        joinButton.setButtonStyle(title: "회원가입")
     }
 }
 
