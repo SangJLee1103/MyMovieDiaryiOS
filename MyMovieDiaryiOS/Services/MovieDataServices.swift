@@ -8,11 +8,34 @@
 import Foundation
 import Alamofire
 import Combine
+import RxSwift
 
 class MovieDataServices {
     
     private let kobisURL = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
     private let naverURL = "https://openapi.naver.com/v1/search/movie.json"
+    
+    let kobisParameter: [String: String] = [
+        "key": Constants.kobisKey,
+        "targetDt": DateUtil.getCurrentDateTime(now: Date())
+    ]
+    
+    func getBoxOffice() -> Observable<[DailyBoxOfficeList]> {
+        return Observable.create { (observer) -> Disposable in
+            self.getBoxOffice(parameter: self.kobisParameter) { (boxOfficeResult, error) in
+                if let e = error {
+                    observer.onError(e)
+                }
+                
+                if let boxOfficeResult = boxOfficeResult {
+                    observer.onNext(boxOfficeResult)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+        
+    }
     
     // 영화진흥위원회 서비스
     func getBoxOffice(parameter: Parameters, completion: @escaping ([DailyBoxOfficeList]?, Error?) -> ()) {

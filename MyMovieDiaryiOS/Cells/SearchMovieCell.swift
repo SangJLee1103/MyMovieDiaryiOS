@@ -23,6 +23,7 @@ class SearchMovieCell: UITableViewCell {
         movieNameLbl.sizeToFit()
         movieNameLbl.textColor = .white
         movieNameLbl.font = .systemFont(ofSize: 15, weight: .heavy)
+        movieNameLbl.numberOfLines = 1
         movieNameLbl.translatesAutoresizingMaskIntoConstraints = false
         return movieNameLbl
     }()
@@ -60,8 +61,8 @@ class SearchMovieCell: UITableViewCell {
     
     private func addContentView() {
         contentView.addSubview(imgView)
-        contentView.addSubview(movieNameLbl)
         contentView.addSubview(gradeLbl)
+        contentView.addSubview(movieNameLbl)
         contentView.addSubview(actorsLbl)
     }
     
@@ -81,7 +82,7 @@ class SearchMovieCell: UITableViewCell {
         NSLayoutConstraint.activate([
             movieNameLbl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             movieNameLbl.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 10),
-            movieNameLbl.trailingAnchor.constraint(equalTo: gradeLbl.trailingAnchor, constant: 15)
+            movieNameLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70)
         ])
         
         NSLayoutConstraint.activate([

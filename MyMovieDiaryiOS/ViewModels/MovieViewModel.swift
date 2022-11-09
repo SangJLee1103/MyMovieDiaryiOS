@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Alamofire
+import RxSwift
 
 
 // MARK: - 메인 영화 박스오피스에 대한 뷰 모델

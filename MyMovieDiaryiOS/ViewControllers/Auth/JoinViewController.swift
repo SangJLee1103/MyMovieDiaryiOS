@@ -13,6 +13,7 @@ import FirebaseFirestore
 class JoinViewController: UIViewController {
     
     let db = Firestore.firestore()
+    var duplicationCnt = 0
     
     let emailLbl: UILabel = {
         let emailLbl = UILabel()
@@ -33,16 +34,6 @@ class JoinViewController: UIViewController {
         emailField.translatesAutoresizingMaskIntoConstraints = false
         return emailField
     }()
-    
-    let emailDuplicationBtn: UIButton = {
-        let emailDuplicationBtn = UIButton()
-        emailDuplicationBtn.titleLabel?.font = .systemFont(ofSize: 15)
-        emailDuplicationBtn.setTitleColor(.red, for: .normal)
-        emailDuplicationBtn.setTitle("중복확인", for: .normal)
-        emailDuplicationBtn.translatesAutoresizingMaskIntoConstraints = false
-        return emailDuplicationBtn
-    }()
-    
     
     let pwLbl: UILabel = {
         let pwLbl = UILabel()
@@ -96,17 +87,6 @@ class JoinViewController: UIViewController {
         return nicknameField
     }()
     
-    let nicknameDuplicationBtn: UIButton = {
-        let nicknameDuplicationBtn = UIButton()
-        nicknameDuplicationBtn.titleLabel?.font = .systemFont(ofSize: 15)
-        nicknameDuplicationBtn.setTitleColor(.red, for: .normal)
-        nicknameDuplicationBtn.setTitle("중복확인", for: .normal)
-        nicknameDuplicationBtn.translatesAutoresizingMaskIntoConstraints = false
-        return nicknameDuplicationBtn
-    }()
-    
-  
-    
     let joinButton: BottomButton = {
         let joinButton = BottomButton()
         joinButton.setButtonStyle(title: "회원가입")
@@ -146,12 +126,6 @@ extension JoinViewController {
             emailField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
-        emailField.addSubview(emailDuplicationBtn)
-        NSLayoutConstraint.activate([
-            emailDuplicationBtn.centerYAnchor.constraint(equalTo: emailField.centerYAnchor),
-            emailDuplicationBtn.trailingAnchor.constraint(equalTo: emailField.trailingAnchor, constant: -10)
-        ])
-        
         view.addSubview(pwLbl)
         NSLayoutConstraint.activate([
             pwLbl.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 30),
@@ -188,13 +162,6 @@ extension JoinViewController {
             nicknameField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
         
-        nicknameField.addSubview(nicknameDuplicationBtn)
-        NSLayoutConstraint.activate([
-            nicknameDuplicationBtn.centerYAnchor.constraint(equalTo: nicknameField.centerYAnchor),
-            nicknameDuplicationBtn.trailingAnchor.constraint(equalTo: nicknameField.trailingAnchor, constant: -10)
-        ])
-        
-        
         view.addSubview(joinButton)
         NSLayoutConstraint.activate([
             joinButton.topAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -50),
@@ -205,21 +172,17 @@ extension JoinViewController {
     }
 }
 
-
-// MARK: - 버튼 클릭에 대한 확장
 extension JoinViewController {
-    // email 중복 확인
-    @objc func emailDuplication() {
-        
-        
+    @objc func nicknameCheck() {
+        if let nickname = self.nicknameField.text {
+            var findNickname = self.db.collection("user").whereField("user", isEqualTo: nickname)
+
+           
+        }
     }
     
-    // 닉네임 중복 확인
-    @objc func nicknameDuplication() {
-        
-        
-    }
 }
+
 
 // MARK: - 하단 버튼 프로토콜 구현
 extension JoinViewController: BottomButtonProtocol {
@@ -229,17 +192,21 @@ extension JoinViewController: BottomButtonProtocol {
         if let email = self.emailField.text, let password = self.pwField.text, let nickname = self.nicknameField.text {
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                 if let e = error {
-                    print(e)
-                }
-                self.db.collection("user").addDocument(data: [
-                    "email": email,
-                    "password": password,
-                    "nickname": nickname
-                ]) { (error) in
-                    if let e = error {
-                        print("There was an issue saving data to firestore, \(e)")
-                    } else {
-                        print("Successfully saved data")
+                    showToast(message: e.localizedDescription, view: self.view)
+                    print(e.localizedDescription)
+                    return
+                } else {
+                    self.db.collection("user").addDocument(data: [
+                        "email": email,
+                        "password": password,
+                        "nickname": nickname
+                    ]) { (error) in
+                        if let e = error {
+                            showToast(message: "이미 등록된 닉네임입니다.", view: self.view)
+                            print("There was an issue saving data to firestore, \(e)")
+                        } else {
+                            print("Successfully saved data")
+                        }
                     }
                 }
             }

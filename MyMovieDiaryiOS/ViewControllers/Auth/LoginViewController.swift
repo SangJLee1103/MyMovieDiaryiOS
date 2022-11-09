@@ -271,7 +271,6 @@ extension LoginViewController {
                         print(e)
                     } else {
                         print(email)
-                        print("보내짐")
                     }
                 }
             }

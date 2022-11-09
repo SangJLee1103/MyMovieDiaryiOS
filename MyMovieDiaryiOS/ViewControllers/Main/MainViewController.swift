@@ -236,10 +236,10 @@ extension MainViewController: UISearchResultsUpdating {
 
 
 extension MainViewController: UISearchControllerDelegate, UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let search = searchController.searchBar.text {
-        }
-    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        if let search = searchController.searchBar.text {
+//        }
+//    }
     
     // cancel 클릭시 검색 테이블 뷰 제거
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

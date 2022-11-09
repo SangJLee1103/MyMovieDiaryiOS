@@ -20,6 +20,7 @@
 		F43DC84B290779E4006438A4 /* MainSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */; };
 		F43DC84D2907A1E1006438A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */; };
 		F43DC8512907CB23006438A4 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43DC8502907CB23006438A4 /* SearchMovieCell.swift */; };
+		F44A68F42918E02300F138D0 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44A68F32918E02300F138D0 /* ToastMessage.swift */; };
 		F4985E7B2910C523001A58E3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4985E7A2910C523001A58E3 /* JoinViewController.swift */; };
 		F4A1028A2904EE7D00775066 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A102892904EE7D00775066 /* MovieDetailViewController.swift */; };
 		F4A1028D2905037F00775066 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A1028C2905037F00775066 /* DateUtil.swift */; };
@@ -29,11 +30,13 @@
 		F4C6A05B290A3819006513B3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A05A290A3819006513B3 /* SearchViewController.swift */; };
 		F4C6A05D290E3A5D006513B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A05C290E3A5D006513B3 /* LoginViewController.swift */; };
 		F4DB34E8290145C400F05905 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DB34E7290145C400F05905 /* MovieViewModel.swift */; };
+		F5FEDDD22327F203845C952F /* Pods_MyMovieDiaryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925281FA89CBE810B9236B8B /* Pods_MyMovieDiaryiOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E947223D558608C1206B421 /* Pods-MyMovieDiaryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieDiaryiOS.debug.xcconfig"; path = "Target Support Files/Pods-MyMovieDiaryiOS/Pods-MyMovieDiaryiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		665D68E1EC3969F78F3CC945 /* Pods-MyMovieDiaryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieDiaryiOS.release.xcconfig"; path = "Target Support Files/Pods-MyMovieDiaryiOS/Pods-MyMovieDiaryiOS.release.xcconfig"; sourceTree = "<group>"; };
+		925281FA89CBE810B9236B8B /* Pods_MyMovieDiaryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMovieDiaryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41891C528FFF1800017E258 /* MyMovieDiaryiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMovieDiaryiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41891C828FFF1800017E258 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F41891CA28FFF1800017E258 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		F43DC84A290779E4006438A4 /* MainSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSupplementaryView.swift; sourceTree = "<group>"; };
 		F43DC84C2907A1E1006438A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F43DC8502907CB23006438A4 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
+		F44A68F32918E02300F138D0 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		F4985E7A2910C523001A58E3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		F4A102892904EE7D00775066 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		F4A1028C2905037F00775066 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5FEDDD22327F203845C952F /* Pods_MyMovieDiaryiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +89,7 @@
 		EE335A1473CB5EC9B03CAA86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				925281FA89CBE810B9236B8B /* Pods_MyMovieDiaryiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				F4333491291393AA002A5748 /* BottomButton.swift */,
+				F44A68F32918E02300F138D0 /* ToastMessage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -345,6 +352,7 @@
 				F41891E728FFF1E00017E258 /* MovieList.swift in Sources */,
 				F43DC84B290779E4006438A4 /* MainSupplementaryView.swift in Sources */,
 				F4C6A05B290A3819006513B3 /* SearchViewController.swift in Sources */,
+				F44A68F42918E02300F138D0 /* ToastMessage.swift in Sources */,
 				F4A10291290506CA00775066 /* StringUtil.swift in Sources */,
 				F41891CB28FFF1800017E258 /* SceneDelegate.swift in Sources */,
 				F4C6A05D290E3A5D006513B3 /* LoginViewController.swift in Sources */,
